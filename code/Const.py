@@ -23,6 +23,11 @@ ENTITY_SPEED = {
     'Level2Bg2': 2,
     'Level2Bg3': 3,
     'Level2Bg4': 4,
+    'Level3Bg0': 0,
+    'Level3Bg1': 1,
+    'Level3Bg2': 2,
+    'Level3Bg3': 3,
+    'Level3Bg4': 4,
     'Player1': 3,
     'Player1Shot': 1,
     'Player2': 3,
@@ -31,6 +36,8 @@ ENTITY_SPEED = {
     'Enemy1Shot': 5,
     'Enemy2': 1,
     'Enemy2Shot': 2,
+    'Enemy3': 3,
+    'Enemy3Shot': 1,
 }
 
 ENTITY_HEALTH = {
@@ -46,14 +53,21 @@ ENTITY_HEALTH = {
     'Level2Bg2': 999,
     'Level2Bg3': 999,
     'Level2Bg4': 999,
+    'Level3Bg0': 999,
+    'Level3Bg1': 999,
+    'Level3Bg2': 999,
+    'Level3Bg3': 999,
+    'Level3Bg4': 999,
     'Player1': 300,
-    'Player1Shot': 1,
+    'Player1Shot': 200,
     'Player2': 300,
-    'Player2Shot': 1,
+    'Player2Shot': 200,
     'Enemy1': 50,
     'Enemy1Shot': 1,
     'Enemy2': 60,
     'Enemy2Shot': 1,
+    'Enemy3': 30,
+    'Enemy3Shot': 1,
 }
 
 ENTITY_DAMAGE = {
@@ -69,14 +83,21 @@ ENTITY_DAMAGE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
     'Level2Bg4': 0,
+    'Level3Bg0': 0,
+    'Level3Bg1': 0,
+    'Level3Bg2': 0,
+    'Level3Bg3': 0,
+    'Level3Bg4': 0,
     'Player1': 1,
-    'Player1Shot': 25,
+    'Player1Shot': 15,
     'Player2': 1,
     'Player2Shot': 20,
     'Enemy1': 1,
     'Enemy1Shot': 20,
     'Enemy2': 1,
     'Enemy2Shot': 15,
+    'Enemy3': 1,
+    'Enemy3Shot': 25,
 }
 
 ENTITY_SCORE = {
@@ -92,6 +113,11 @@ ENTITY_SCORE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
     'Level2Bg4': 0,
+    'Level3Bg0': 0,
+    'Level3Bg1': 0,
+    'Level3Bg2': 0,
+    'Level3Bg3': 0,
+    'Level3Bg4': 0,
     'Player1': 0,
     'Player1Shot': 0,
     'Player2': 0,
@@ -100,13 +126,16 @@ ENTITY_SCORE = {
     'Enemy1Shot': 0,
     'Enemy2': 125,
     'Enemy2Shot': 0,
+    'Enemy3': 125,
+    'Enemy3Shot': 0,
 }
 
 ENTITY_SHOT_DELAY = {
-    'Player1': 20,
-    'Player2': 15,
+    'Player1': 100,
+    'Player2': 100,
     'Enemy1': 100,
     'Enemy2': 200,
+    'Enemy3': 20,
 }
 
 # M
@@ -129,11 +158,27 @@ PLAYER_KEY_SHOOT = {'Player1': pygame.K_RCTRL,
                     'Player2': pygame.K_LCTRL}
 
 # S
-SPAWN_TIME = 4000
+
+SPAWN_TIME_LEVEL1 = 1500  # Ajuste para 1.5 segundos
+SPAWN_TIME_LEVEL2 = 1200  # Ajuste para 1.2 segundos
+SPAWN_TIME_LEVEL3 = 800   # Ajuste para 0.8 segundos
+# Eventos
+import pygame
+
+EVENT_ENEMY = pygame.USEREVENT + 1
+EVENT_TIMEOUT = pygame.USEREVENT + 2
+
+# Tempo de spawn dos inimigos e timeout
+SPAWN_TIME = 4000  # Defina o tempo de spawn dos inimigos em milissegundos (ajuste conforme desejado)
+TIMEOUT_STEP = 100
+TIMEOUT_LEVEL = 7000
+
+# Demais constantes e configurações já presentes no seu Const.py...
 
 # T
 TIMEOUT_STEP = 100  # 100ms
-TIMEOUT_LEVEL = 20000  # 20s
+TIMEOUT_LEVEL = 7000  # 20s
+
 # W
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
@@ -153,4 +198,4 @@ SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
              7: (WIN_WIDTH / 2, 250),
              8: (WIN_WIDTH / 2, 270),
              9: (WIN_WIDTH / 2, 290),
-             }
+                    }

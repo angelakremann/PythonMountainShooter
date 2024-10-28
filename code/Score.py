@@ -57,7 +57,7 @@ class Score:
             pygame.display.flip()
             pass
 
-    def show(self):
+    def show (self):
         pygame.mixer_music.load('./asset/Score.mp3')
         pygame.mixer_music.play(-1)
         self.window.blit(source=self.surf, dest=self.rect)
@@ -82,7 +82,7 @@ class Score:
             pygame.display.flip()
 
     def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_font: Font = pygame.font.SysFont(name="Arial", size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
