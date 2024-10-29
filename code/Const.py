@@ -130,13 +130,14 @@ ENTITY_SCORE = {
     'Enemy3Shot': 0,
 }
 
+# Reduzindo os valores de atraso para tornar os tiros mais rápidos
 ENTITY_SHOT_DELAY = {
-    'Player1': 100,
-    'Player2': 100,
-    'Enemy1': 100,
-    'Enemy2': 200,
-    'Enemy3': 20,
+    'Player1': 15,  # Jogador dispara mais rápido
+    'Enemy1': 20,  # Inimigo 1 dispara rapidamente
+    'Enemy2': 15,  # Inimigo 2 dispara mais rápido
+    'Enemy3': 15,  # Inimigo 3 também dispara rapidamente
 }
+
 
 # M
 MENU_OPTION = ('NEW GAME 1P',

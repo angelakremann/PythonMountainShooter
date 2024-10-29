@@ -13,21 +13,29 @@ from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Player import Player
 
-
 class Level:
     def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
         self.window = window
         self.name = name
         self.game_mode = game_mode
         self.entity_list = EntityFactory.get_entity(self.name + 'Bg') + [EntityFactory.get_entity('Player1')]
-        self.timeout = TIMEOUT_LEVEL
+        self.timeout = TIMEOUT_LEVEL  # Tempo padrão, ajustável para cada fase
         self.player_score = player_score
 
         # Define o tipo de inimigo com base na fase atual
         self.enemy_type = {'Level1': 'Enemy1', 'Level2': 'Enemy2', 'Level3': 'Enemy3'}.get(name)
 
+        # Ajuste do tempo para cada fase
+        if name == 'Level1':
+            self.timeout = 10000  # 10 segundos para a Fase 1
+        elif name == 'Level2':
+            self.timeout = 10000  # 10 segundos para a Fase 2
+        elif name == 'Level3':
+            self.timeout = 20000  # 20 segundos para a Fase 3
+
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
+
 
     def run(self, player_score):
         # Carregar e tocar música da fase
@@ -58,7 +66,7 @@ class Level:
                 # Controle de disparo do jogador
                 if isinstance(ent, Player):
                     keys = pygame.key.get_pressed()
-                    if keys[pygame.K_SPACE]:  # Pressiona espaço para disparar
+                    if keys[pygame.K_LCTRL]:  # Pressiona Ctrl para disparar
                         shoot = ent.shoot()
                         if shoot:
                             self.entity_list.append(shoot)
@@ -89,7 +97,8 @@ class Level:
                         # Garante que o jogador esteja na lista antes de acessar `score`
                         player_entity = next((ent for ent in self.entity_list if isinstance(ent, Player)), None)
                         if player_entity:
-                            player_score[0] = player_entity.score
+                            # Acumula o score ao final da fase
+                            player_score[0] += player_entity.score
                         return True
 
             # Exibe o HUD

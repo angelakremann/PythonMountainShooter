@@ -5,26 +5,29 @@ from code.EnemyShot import EnemyShot
 class Enemy(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
-        self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 0)
+        self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 10)  # Valor reduzido para disparos rápidos
 
     def move(self):
-        # Movimento padrão da direita para a esquerda
         self.rect.centerx -= ENTITY_SPEED.get(self.name, 1)
 
     def shoot(self):
-        return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
+        if self.shot_delay <= 0:
+            self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 10)  # Reinicia o atraso do tiro
+            return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
+        else:
+            self.shot_delay -= 1
+        return None
+
 
 class Enemy3(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
-        self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 0)
-        self.moving_down = True  # Começa movendo-se para baixo
+        self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 5)
+        self.moving_down = True
 
     def move(self):
-        # Movimento horizontal para a esquerda
         self.rect.centerx -= ENTITY_SPEED.get(self.name, 1)
 
-        # Movimento vertical alternado para Enemy3
         if self.moving_down:
             self.rect.centery += ENTITY_SPEED.get(self.name, 1)
             if self.rect.bottom >= WIN_HEIGHT:
@@ -35,4 +38,9 @@ class Enemy3(Entity):
                 self.moving_down = True
 
     def shoot(self):
-        return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
+        if self.shot_delay <= 0:
+            self.shot_delay = ENTITY_SHOT_DELAY.get(self.name, 5)
+            return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
+        else:
+            self.shot_delay -= 1
+        return None
